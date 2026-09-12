@@ -480,3 +480,5 @@ Formula
 Interpretation
 
 That architecture will make MoneyMaths feel like a financial terminal, rather than a collection of random online calculators.
+for run the website type this code into terminal- python3 -m http.server 8000
+

@@ -1,29 +1,14 @@
-const form = document.querySelector('#sip-form');
-
-if (form) {
-  const monthlyInput = document.querySelector('#monthly-investment');
-  const rateInput = document.querySelector('#return-rate');
-  const yearsInput = document.querySelector('#time-period');
-  const totalValue = document.querySelector('#total-value');
-  const investedValue = document.querySelector('#invested-value');
-  const returnsValue = document.querySelector('#returns-value');
-  const formatCurrency = (value) => `₹${Math.round(value).toLocaleString('en-IN')}`;
-
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const monthly = Number(monthlyInput.value) || 0;
-    const annualRate = (Number(rateInput.value) || 0) / 100;
-    const years = Number(yearsInput.value) || 0;
-    const months = years * 12;
-    const monthlyRate = annualRate / 12;
-    const invested = monthly * months;
-    const futureValue = monthlyRate === 0
-      ? invested
-      : monthly * (((1 + monthlyRate) ** months - 1) / monthlyRate) * (1 + monthlyRate);
-
-    totalValue.value = formatCurrency(futureValue);
-    totalValue.textContent = formatCurrency(futureValue);
-    investedValue.textContent = formatCurrency(invested);
-    returnsValue.textContent = formatCurrency(Math.max(0, futureValue - invested));
-  });
+const personal = [
+  ['sip', 'SIP Calculator', 'Savings & investment'], ['lump-sum', 'Lump Sum Investment Calculator', 'Savings & investment'], ['sip-lump-sum', 'SIP + Lump Sum Calculator', 'Savings & investment'], ['step-up-sip', 'Step-Up SIP Calculator', 'Savings & investment'], ['swp', 'SWP Calculator', 'Savings & investment'], ['stp', 'STP Calculator', 'Savings & investment'], ['goal-based-investment', 'Goal-Based Investment Calculator', 'Savings & investment'], ['recurring-deposit', 'Recurring Deposit Calculator', 'Savings & investment'], ['ppf', 'PPF Calculator', 'Savings & investment'], ['nps', 'NPS Calculator', 'Savings & investment'], ['fd', 'FD Calculator', 'Savings & investment'], ['bond-yield', 'Bond / Yield Calculator', 'Savings & investment'], ['inflation', 'Inflation Calculator', 'Savings & investment'], ['real-return', 'Real Return Calculator', 'Savings & investment'], ['cagr', 'CAGR Calculator', 'Savings & investment'], ['emi', 'EMI Calculator', 'Loans & debt'], ['loan-amortization', 'Loan Amortization Calculator', 'Loans & debt'], ['home-loan', 'Home Loan Calculator', 'Loans & debt'], ['car-loan', 'Car Loan Calculator', 'Loans & debt'], ['personal-loan', 'Personal Loan Calculator', 'Loans & debt'], ['loan-prepayment', 'Loan Prepayment Calculator', 'Loans & debt'], ['loan-balance', 'Loan Balance Calculator', 'Loans & debt'], ['debt-to-income', 'Debt-to-Income Ratio Calculator', 'Loans & debt'], ['credit-card-interest', 'Credit Card Interest Calculator', 'Loans & debt'], ['retirement', 'Retirement Calculator', 'Personal planning'], ['fire', 'FIRE Calculator', 'Personal planning'], ['emergency-fund', 'Emergency Fund Calculator', 'Personal planning'], ['net-worth', 'Net Worth Calculator', 'Personal planning'], ['savings-rate', 'Savings Rate Calculator', 'Personal planning'], ['monthly-budget', 'Monthly Budget Calculator', 'Personal planning'], ['financial-independence', 'Financial Independence Calculator', 'Personal planning'], ['education-cost', 'Education Cost Calculator', 'Personal planning'], ['future-value', 'Future Value Calculator', 'Personal planning'], ['present-value', 'Present Value Calculator', 'Personal planning'], ['time-value-of-money', 'Time Value of Money Calculator', 'Personal planning']
+];
+const businessNames = ['Break-Even', 'Contribution Margin', 'Gross Margin', 'Operating Margin', 'Net Profit Margin', 'Markup vs Margin', 'Unit Economics', 'Customer Acquisition Cost (CAC)', 'Customer Lifetime Value (LTV)', 'LTV/CAC', 'Burn Rate', 'Runway', 'Working Capital', 'Net Working Capital', 'Operating Cycle', 'Cash Conversion Cycle', 'Inventory Days', 'Receivable Days', 'Payable Days', 'Working Capital Requirement', 'EBIT', 'EBITDA', 'EBITDA Margin', 'EBIT vs EBITDA', 'Operating Leverage', 'Financial Leverage', 'Degree of Operating Leverage (DOL)', 'Degree of Financial Leverage (DFL)', 'Degree of Total Leverage (DTL)', 'Product Pricing', 'Cost-Plus Pricing', 'Target Profit Pricing', 'Discount', 'GST Inclusive/Exclusive Price', 'Selling Price', 'Contribution-Based Pricing'];
+const investmentNames = ['Absolute Return', 'XIRR', 'Annualized Return', 'Holding Period Return', 'Realized vs Unrealized Return', 'Dividend Return', 'Total Shareholder Return (TSR)', 'Portfolio Return', 'Portfolio Weighted Average', 'Portfolio Allocation', 'Portfolio Rebalancing', 'Expected Portfolio Return', 'Portfolio Risk', 'Sharpe Ratio', 'Sortino Ratio', 'Treynor Ratio', "Jensen's Alpha", 'Beta', 'Correlation', 'Covariance', 'Portfolio Beta', 'P/E Ratio', 'Forward P/E', 'PEG Ratio', 'P/B Ratio', 'P/S Ratio', 'EV/EBITDA', 'EV/EBIT', 'EV/Sales', 'Dividend Yield', 'Dividend Payout Ratio', 'Retention Ratio', 'ROE', 'ROA', 'ROIC', 'Earnings Yield'];
+const slugify = (name) => name.toLowerCase().replace(/[']/g, '').replace(/p\/e/g, 'pe').replace(/p\/b/g, 'pb').replace(/p\/s/g, 'ps').replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+const business = businessNames.map((name) => [slugify(name), `${name} Calculator`, 'Business finance']);
+const investment = investmentNames.map((name) => [slugify(name), `${name} Calculator`, 'Investment & markets']);
+const tools = [...personal, ...business, ...investment];
+const catalog = document.querySelector('#calculator-catalog');
+if (catalog) {
+  const categories = [...new Set(tools.map((tool) => tool[2]))];
+  catalog.innerHTML = categories.map((category) => `<div class="catalog-group"><div class="catalog-heading"><h3>${category}</h3><span>${tools.filter((tool) => tool[2] === category).length} tools</span></div><div class="catalog-links">${tools.filter((tool) => tool[2] === category).map((tool) => `<a href="calculators/${tool[0]}.html">${tool[1]} <span aria-hidden="true">-&gt;</span></a>`).join('')}</div></div>`).join('');
 }
