@@ -473,3 +473,15 @@ You get a plain text box like Word/Google Docs — write your article title and 
 Click "Publish" — it automatically turns into a page on your Read section
 
 This is now configured in `/admin/`. The site currently uses GitHub Pages, and the included GitHub Actions workflow builds articles on every push. To use the `/admin/` login, host the site on Netlify, enable Netlify Identity and Git Gateway, then visit `/admin/` to sign in and publish. GitHub Pages can serve the generated articles, but it does not provide the OAuth service that Decap needs to publish from the browser.
+
+
+
+# to check all canges move to git hub repo or not
+Your repository is on main and connected to origin. Run:
+git add .
+git commit -m "Update reading page article feed"
+git push origin main
+
+# To verify afterward:
+
+git status
