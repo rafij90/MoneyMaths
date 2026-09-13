@@ -273,16 +273,7 @@ FCFE Calculator
 ROIC Tree / DuPont Analysis
 DuPont ROE Calculator
 10. Tax & GST — India
-2. Posting articles without editing HTML
 
-The simplest option for someone who doesn't want to code: use a free tool called Decap CMS. Here's what that actually means for you:
-
-I set it up once in your project (a small config file, done for you)
-After that, you go to a simple login page on your own site
-You get a plain text box like Word/Google Docs — write your article title and content
-Click "Publish" — it automatically turns into a page on your Read section
-
-This is now configured in `/admin/`. The site currently uses GitHub Pages, and the included GitHub Actions workflow builds articles on every push. To use the `/admin/` login, host the site on Netlify, enable Netlify Identity and Git Gateway, then visit `/admin/` to sign in and publish. GitHub Pages can serve the generated articles, but it does not provide the OAuth service that Decap needs to publish from the browser.
 
 For these, we'd make the calculation engine configurable, rather than hard-coding tax rates everywhere.
 
@@ -472,3 +463,13 @@ Interpretation
 That architecture will make MoneyMaths feel like a financial terminal, rather than a collection of random online calculators.
 for run the website type this code into terminal- python3 -m http.server 8000
 
+2. Posting articles without editing HTML
+
+The simplest option for someone who doesn't want to code: use a free tool called Decap CMS. Here's what that actually means for you:
+
+I set it up once in your project (a small config file, done for you)
+After that, you go to a simple login page on your own site
+You get a plain text box like Word/Google Docs — write your article title and content
+Click "Publish" — it automatically turns into a page on your Read section
+
+This is now configured in `/admin/`. The site currently uses GitHub Pages, and the included GitHub Actions workflow builds articles on every push. To use the `/admin/` login, host the site on Netlify, enable Netlify Identity and Git Gateway, then visit `/admin/` to sign in and publish. GitHub Pages can serve the generated articles, but it does not provide the OAuth service that Decap needs to publish from the browser.

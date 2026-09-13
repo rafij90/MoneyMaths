@@ -2,7 +2,7 @@
   "name": "moneymaths",
   "private": true,
   "scripts": {
-    "build": "node scripts/build-articles.js"
+    "build": "node scripts/build-articles.js && node scripts/build-calculator-metadata.js"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
