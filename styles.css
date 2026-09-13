@@ -82,6 +82,7 @@ h1,h2,h3,p { margin-top:0; } h1 { max-width:620px; margin-bottom:24px; font-size
 .article-shell { max-width:820px; padding:70px 0 100px; }
 .article-shell h1 { max-width:760px; margin-bottom:22px; font-size:clamp(42px,6vw,70px); }
 .article-summary { max-width:620px; margin-bottom:55px; color:var(--muted); font-size:16px; line-height:1.7; }
+.article-cover { width:100%; max-width:700px; height:auto; aspect-ratio:1200/630; object-fit:cover; margin-bottom:35px; }
 .article-content { max-width:700px; padding-top:35px; border-top:1px solid var(--line); font-size:15px; line-height:1.85; }
 .article-content h2 { margin:42px 0 14px; font-size:30px; line-height:1.15; letter-spacing:-1px; }
 .article-content h3 { margin:30px 0 10px; font-size:21px; }

@@ -5,7 +5,9 @@ const { marked } = require('marked');
 
 const root = path.resolve(__dirname, '..');
 const sourceDirectory = path.join(root, 'content', 'articles');
+const sourceImageDirectory = path.join(sourceDirectory, 'images');
 const outputDirectory = path.join(root, 'articles');
+const outputImageDirectory = path.join(outputDirectory, 'images');
 fs.mkdirSync(sourceDirectory, { recursive: true });
 
 const escapeHtml = (value) => String(value || '')
@@ -34,12 +36,22 @@ const articles = articleFiles.map((file) => {
     summary: data.summary || '',
     category: data.category || 'MoneyMaths guide',
     date,
+    image: data.image || '',
     slug,
     html: marked.parse(content)
   };
 }).sort((first, second) => second.date.localeCompare(first.date));
 
 fs.mkdirSync(outputDirectory, { recursive: true });
+fs.mkdirSync(outputImageDirectory, { recursive: true });
+for (const article of articles) {
+  if (!article.image) continue;
+  const sourceImage = path.join(sourceImageDirectory, article.image);
+  if (!fs.existsSync(sourceImage)) {
+    throw new Error(`Image not found for ${article.slug}: ${article.image}`);
+  }
+  fs.copyFileSync(sourceImage, path.join(outputImageDirectory, article.image));
+}
 fs.writeFileSync(
   path.join(outputDirectory, 'index.json'),
   `${JSON.stringify(articles.map(({ html, ...article }) => article), null, 2)}\n`
@@ -51,6 +63,7 @@ const articleTemplate = (article) => `<!doctype html>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(article.title)} | MoneyMaths</title>
+  <meta name="description" content="${escapeHtml(article.summary)}">
   <link rel="stylesheet" href="../styles.css">
 </head>
 <body class="article-page">
@@ -64,6 +77,7 @@ const articleTemplate = (article) => `<!doctype html>
     <p class="eyebrow">${escapeHtml(article.category)}${article.date ? ` &middot; ${escapeHtml(article.date)}` : ''}</p>
     <h1>${escapeHtml(article.title)}</h1>
     <p class="article-summary">${escapeHtml(article.summary)}</p>
+    ${article.image ? `<img class="article-cover" src="images/${encodeURIComponent(article.image)}" alt="${escapeHtml(article.title)}" width="1200" height="630">` : ''}
     <article class="article-content">${article.html}</article>
   </main>
   <footer class="site-footer shell"><span>MoneyMaths</span><span>Numbers for real life.</span></footer>

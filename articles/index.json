@@ -1,9 +1,26 @@
 [
   {
+    "title": "How Much Should Your Emergency Fund Be?",
+    "summary": "Build a cash buffer that can handle essential expenses, income gaps, and unexpected bills without derailing your plans.",
+    "category": "Personal finance",
+    "date": "2026-09-15",
+    "image": "emergency-fund-basics.svg",
+    "slug": "emergency-fund-basics"
+  },
+  {
+    "title": "SIP vs Lump Sum: Which Wins?",
+    "summary": "Compare regular investing with a lump-sum investment and learn when each approach may fit your goals.",
+    "category": "Investing basics",
+    "date": "2026-09-14",
+    "image": "sip-vs-lump-sum.svg",
+    "slug": "sip-vs-lump-sum"
+  },
+  {
     "title": "How compounding grows wealth",
     "summary": "See why time, regular contributions, and returns work together to change long-term outcomes.",
     "category": "Investing basics",
     "date": "2026-09-13",
+    "image": "",
     "slug": "how-compounding-grows-wealth"
   }
 ]

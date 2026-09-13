@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">SIP and lump-sum investing</title>
+  <desc id="desc">A rising line chart beside a row of recurring investment marks.</desc>
+  <rect width="1200" height="630" fill="#e8eee5"/>
+  <rect x="72" y="72" width="1056" height="486" rx="18" fill="#173d35"/>
+  <path d="M150 465H1050M150 465V155" stroke="#f4efe4" stroke-width="4" opacity=".55"/>
+  <path d="M170 430L315 390L440 405L575 315L710 335L845 225L1030 170" fill="none" stroke="#e9a15b" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="170" cy="430" r="12" fill="#f4efe4"/><circle cx="315" cy="390" r="12" fill="#f4efe4"/><circle cx="440" cy="405" r="12" fill="#f4efe4"/><circle cx="575" cy="315" r="12" fill="#f4efe4"/><circle cx="710" cy="335" r="12" fill="#f4efe4"/><circle cx="845" cy="225" r="12" fill="#f4efe4"/><circle cx="1030" cy="170" r="12" fill="#f4efe4"/>
+</svg>
