@@ -9,13 +9,21 @@ const startupNames = ['Startup Valuation', 'Pre-Money / Post-Money Valuation', '
 const dateTimeNames = ['Age', 'Date Difference', 'Date Add / Subtract', 'Time Duration', 'Hours to Minutes', 'Minutes to Seconds', 'Seconds to Milliseconds', 'Milliseconds to Seconds'];
 const timeValueNames = ['Compound Interest', 'Simple Interest', 'Interest Rate', 'Number of Periods', 'Annuity Future Value', 'Annuity Present Value', 'Annuity Payment', 'Net Present Value', 'Discount Factor'];
 const investmentNames = ['Absolute Return', 'XIRR', 'Annualized Return', 'Holding Period Return', 'Realized vs Unrealized Return', 'Dividend Return', 'Total Shareholder Return (TSR)', 'Portfolio Return', 'Portfolio Weighted Average', 'Portfolio Allocation', 'Portfolio Rebalancing', 'Expected Portfolio Return', 'Portfolio Risk', 'Sharpe Ratio', 'Sortino Ratio', 'Treynor Ratio', "Jensen's Alpha", 'Beta', 'Correlation', 'Covariance', 'Portfolio Beta', 'P/E Ratio', 'Forward P/E', 'PEG Ratio', 'P/B Ratio', 'P/S Ratio', 'EV/EBITDA', 'EV/EBIT', 'EV/Sales', 'Dividend Yield', 'Dividend Payout Ratio', 'Retention Ratio', 'ROE', 'ROA', 'ROIC', 'Earnings Yield'];
+const valuationNames = ['DCF Valuation', 'FCFF Valuation', 'FCFE Valuation', 'Enterprise Value', 'Equity Value', 'Terminal Value - Gordon Growth', 'Terminal Value - Exit Multiple', 'DCF Sensitivity Analysis', 'WACC vs Growth Sensitivity', 'Enterprise Value Bridge', 'Dividend Valuation', 'Dividend Discount Model (DDM)', 'Gordon Growth Model', 'Two-Stage DDM', 'Three-Stage DDM', 'Residual Income', 'Residual Income Valuation', 'Economic Value Added (EVA)', 'Comparable Company Valuation', 'P/E Valuation', 'EV/EBITDA Valuation', 'EV/Sales Valuation', 'P/B Valuation', 'Precedent Transaction Valuation', 'Football Field Valuation'];
+const accountingNames = ['Diluted EPS', 'Book Value per Share', 'Tangible Book Value', 'Working Capital Ratio', 'Cash Flow Conversion', 'Free Cash Flow', 'FCFF', 'FCFE', 'ROIC Tree / DuPont Analysis', 'DuPont ROE'];
+const fixedIncomeNames = ['Bond Price', 'Bond Yield', 'Current Yield', 'YTM', 'YTC', 'Duration', 'Modified Duration', 'Macaulay Duration', 'Convexity', 'Bond Price Sensitivity', 'Spot Rate', 'Forward Rate', 'Bootstrapping'];
+const realEstateNames = ['Property ROI', 'Rental Yield', 'Property EMI', 'Buy vs Rent', 'Real Estate Cap Rate', 'Property Appreciation', 'Real Estate IRR', 'House Affordability', 'Down Payment'];
 const slugify = (name) => name.toLowerCase().replace(/[']/g, '').replace(/p\/e/g, 'pe').replace(/p\/b/g, 'pb').replace(/p\/s/g, 'ps').replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
 const business = businessNames.map((name) => [slugify(name), `${name} Calculator`, 'Business finance']);
 const startup = startupNames.map((name) => [slugify(name), `${name} Calculator`, 'Startup / Entrepreneur Finance']);
 const dateTime = dateTimeNames.map((name) => [slugify(name), `${name} Calculator`, 'Date & time']);
 const timeValue = timeValueNames.map((name) => [slugify(name), `${name} Calculator`, 'Time value of money']);
 const investment = investmentNames.map((name) => [slugify(name), `${name} Calculator`, 'Investment & markets']);
-const tools = [...personal, ...tax, ...business, ...startup, ...dateTime, ...timeValue, ...investment];
+const valuation = valuationNames.map((name) => [slugify(name), `${name} Calculator`, 'Valuation']);
+const accounting = accountingNames.map((name) => [slugify(name), `${name} Calculator`, 'Accounting & analysis']);
+const fixedIncome = fixedIncomeNames.map((name) => [slugify(name), `${name} Calculator`, 'Fixed income']);
+const realEstate = realEstateNames.map((name) => [slugify(name), `${name} Calculator`, 'Real estate']);
+const tools = [...personal, ...tax, ...business, ...startup, ...dateTime, ...timeValue, ...investment, ...valuation, ...accounting, ...fixedIncome, ...realEstate];
 const catalog = document.querySelector('#calculator-catalog');
 if (catalog) {
   const categories = [...new Set(tools.map((tool) => tool[2]))];
