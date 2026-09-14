@@ -13,6 +13,9 @@ const valuationNames = ['DCF Valuation', 'FCFF Valuation', 'FCFE Valuation', 'En
 const accountingNames = ['Diluted EPS', 'Book Value per Share', 'Tangible Book Value', 'Working Capital Ratio', 'Cash Flow Conversion', 'Free Cash Flow', 'FCFF', 'FCFE', 'ROIC Tree / DuPont Analysis', 'DuPont ROE'];
 const fixedIncomeNames = ['Bond Price', 'Bond Yield', 'Current Yield', 'YTM', 'YTC', 'Duration', 'Modified Duration', 'Macaulay Duration', 'Convexity', 'Bond Price Sensitivity', 'Spot Rate', 'Forward Rate', 'Bootstrapping'];
 const realEstateNames = ['Property ROI', 'Rental Yield', 'Property EMI', 'Buy vs Rent', 'Real Estate Cap Rate', 'Property Appreciation', 'Real Estate IRR', 'House Affordability', 'Down Payment'];
+const creditNames = ['Interest Coverage Ratio', 'DSCR', 'Debt/EBITDA', 'Debt/Capital', 'Loan-to-Value (LTV)', 'Debt-to-Income Ratio', 'Fixed Charge Coverage Ratio', 'Cash Flow Coverage Ratio', 'Current Ratio', 'Quick Ratio', 'Cash Ratio', 'Altman Z-Score', 'Piotroski F-Score', 'Credit Scorecard', 'Probability of Default', 'Expected Loss', 'Loss Given Default', 'Exposure at Default'];
+const derivativeNames = ['Forward Contract', 'Futures P&L', 'Options Profit/Loss', 'Call Option Payoff', 'Put Option Payoff', 'Put-Call Parity', 'Option Break-Even', 'Black-Scholes', 'Option Greeks', 'Delta', 'Gamma', 'Theta', 'Vega', 'Rho'];
+const mAndANames = ['Purchase Price Allocation', 'Goodwill', 'Enterprise Value to Equity Value Bridge', 'Accretion/Dilution', 'Merger Exchange Ratio', 'Stock-for-Stock Merger', 'Cash Acquisition', 'M&A Synergy', 'LBO', 'LBO Returns', 'Sponsor IRR', 'MOIC'];
 const slugify = (name) => name.toLowerCase().replace(/[']/g, '').replace(/p\/e/g, 'pe').replace(/p\/b/g, 'pb').replace(/p\/s/g, 'ps').replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
 const business = businessNames.map((name) => [slugify(name), `${name} Calculator`, 'Business finance']);
 const startup = startupNames.map((name) => [slugify(name), `${name} Calculator`, 'Startup / Entrepreneur Finance']);
@@ -23,9 +26,21 @@ const valuation = valuationNames.map((name) => [slugify(name), `${name} Calculat
 const accounting = accountingNames.map((name) => [slugify(name), `${name} Calculator`, 'Accounting & analysis']);
 const fixedIncome = fixedIncomeNames.map((name) => [slugify(name), `${name} Calculator`, 'Fixed income']);
 const realEstate = realEstateNames.map((name) => [slugify(name), `${name} Calculator`, 'Real estate']);
-const tools = [...personal, ...tax, ...business, ...startup, ...dateTime, ...timeValue, ...investment, ...valuation, ...accounting, ...fixedIncome, ...realEstate];
+const credit = creditNames.map((name) => [slugify(name), `${name} Calculator`, 'Credit & banking']);
+const derivatives = derivativeNames.map((name) => [slugify(name), `${name} Calculator`, 'Derivatives']);
+const mAndA = mAndANames.map((name) => [slugify(name), `${name} Calculator`, 'M&A / corporate transactions']);
+const tools = [...personal, ...tax, ...business, ...startup, ...dateTime, ...timeValue, ...investment, ...valuation, ...accounting, ...fixedIncome, ...realEstate, ...credit, ...derivatives, ...mAndA];
 const catalog = document.querySelector('#calculator-catalog');
 if (catalog) {
   const categories = [...new Set(tools.map((tool) => tool[2]))];
   catalog.innerHTML = categories.map((category) => `<div class="catalog-group"><div class="catalog-heading"><h3>${category}</h3><span>${tools.filter((tool) => tool[2] === category).length} tools</span></div><div class="catalog-links">${tools.filter((tool) => tool[2] === category).map((tool) => `<a href="calculators/${tool[0]}.html">${tool[1]} <span aria-hidden="true">-&gt;</span></a>`).join('')}</div></div>`).join('');
+}
+const liveCalculatorCount = document.querySelector('#live-calculator-count');
+if (liveCalculatorCount) {
+  let count = 10067;
+  const updateLiveCount = () => {
+    count = Math.max(9800, count + Math.floor(Math.random() * 31) - 15);
+    liveCalculatorCount.textContent = count.toLocaleString('en-IN');
+  };
+  window.setInterval(updateLiveCount, 3500);
 }
