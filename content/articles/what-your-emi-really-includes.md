@@ -1,7 +1,7 @@
 ---
 title: "What Your EMI Really Includes (It's Not What Most People Think)"
 description: "A breakdown of how EMIs actually split between principal and interest over time, why early payments barely reduce your loan, and how to use that knowledge to save money."
-category: "Borrowing"
+category: Personal finance
 date: 2026-09-13
 calculator_link: "/calculators/emi.html"
 calculator_label: "Check your EMI"

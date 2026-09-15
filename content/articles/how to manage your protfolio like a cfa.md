@@ -1,7 +1,7 @@
 ---
 title: How to manage Your Portfolio like a CFA?
 summary: Managing portfolio with the help of a CFA can make your rich if you invest substantion amount of money.
-category: Personal finance
+category: Market
 date: 2026-09-15
 image:
 ---

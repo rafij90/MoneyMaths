@@ -1,7 +1,7 @@
 ---
 title: How Much Should Your Emergency Fund Be?
 summary: Build a cash buffer that can handle essential expenses, income gaps, and unexpected bills without derailing your plans.
-category: Personal finance
+category: Savings
 date: 2026-09-15
 image: emergency-fund-basics.svg
 ---

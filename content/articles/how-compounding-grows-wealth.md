@@ -1,7 +1,7 @@
 ---
 title: "How Compounding Grows Wealth (And Why Most People Start Too Late)"
 description: "A clear, example-driven guide to how compound interest actually works, why time matters more than the amount you invest, and how to use it in real financial decisions."
-category: "Investing basics"
+category: Savings
 date: 2026-09-13
 calculator_link: "/calculators/sip.html"
 calculator_label: "Try the SIP calculator"

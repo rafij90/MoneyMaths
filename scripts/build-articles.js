@@ -34,7 +34,7 @@ const articles = articleFiles.map((file) => {
   return {
     title: data.title || 'Untitled article',
     summary: data.summary || '',
-    category: data.category || 'MoneyMaths guide',
+    category: data.category || 'Personal finance',
     date,
     image: data.image || '',
     slug,
@@ -69,11 +69,11 @@ const articleTemplate = (article) => `<!doctype html>
 <body class="article-page">
   <header class="site-header">
     <a class="brand" href="../index.html" aria-label="MoneyMaths home"><span class="brand-mark">M</span><span>Money<span class="brand-accent">Maths</span></span></a>
-    <nav class="main-nav" aria-label="Main navigation"><a href="../index.html">Home</a><a href="../index.html#calculators">Calculators</a><a class="active" href="../read.html">Read</a></nav>
-    <a class="header-action" href="../read.html">All articles <span aria-hidden="true">-&gt;</span></a>
+    <nav class="main-nav" aria-label="Main navigation"><a href="../index.html">Home</a><a href="../index.html#calculators">Calculators</a><a class="active" href="../read.html">News</a></nav>
+    <a class="header-action" href="../read.html">All news <span aria-hidden="true">-&gt;</span></a>
   </header>
   <main class="article-shell shell">
-    <a class="back-link" href="../read.html">&larr; Back to Read</a>
+    <a class="back-link" href="../read.html">&larr; Back to News</a>
     <p class="eyebrow">${escapeHtml(article.category)}${article.date ? ` &middot; ${escapeHtml(article.date)}` : ''}</p>
     <h1>${escapeHtml(article.title)}</h1>
     <p class="article-summary">${escapeHtml(article.summary)}</p>

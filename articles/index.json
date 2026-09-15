@@ -2,7 +2,7 @@
   {
     "title": "How Much Should Your Emergency Fund Be?",
     "summary": "Build a cash buffer that can handle essential expenses, income gaps, and unexpected bills without derailing your plans.",
-    "category": "Personal finance",
+    "category": "Savings",
     "date": "2026-09-15",
     "image": "emergency-fund-basics.svg",
     "slug": "emergency-fund-basics"
@@ -10,7 +10,7 @@
   {
     "title": "How to manage Your Portfolio like a CFA?",
     "summary": "Managing portfolio with the help of a CFA can make your rich if you invest substantion amount of money.",
-    "category": "Personal finance",
+    "category": "Market",
     "date": "2026-09-15",
     "image": "",
     "slug": "how-to-manage-your-protfolio-like-a-cfa"
@@ -18,7 +18,7 @@
   {
     "title": "SIP vs Lump Sum: Which Wins?",
     "summary": "Compare regular investing with a lump-sum investment and learn when each approach may fit your goals.",
-    "category": "Investing basics",
+    "category": "Market",
     "date": "2026-09-14",
     "image": "sip-vs-lump-sum.svg",
     "slug": "sip-vs-lump-sum"
@@ -26,7 +26,7 @@
   {
     "title": "How Compounding Grows Wealth (And Why Most People Start Too Late)",
     "summary": "",
-    "category": "Investing basics",
+    "category": "Savings",
     "date": "2026-09-13",
     "image": "",
     "slug": "how-compounding-grows-wealth"
@@ -34,7 +34,7 @@
   {
     "title": "What Your EMI Really Includes (It's Not What Most People Think)",
     "summary": "",
-    "category": "Borrowing",
+    "category": "Personal finance",
     "date": "2026-09-13",
     "image": "",
     "slug": "what-your-emi-really-includes"

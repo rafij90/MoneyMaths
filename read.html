@@ -3,30 +3,39 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Read | MoneyMaths</title>
+  <title>News | MoneyMaths</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="read-page">
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="MoneyMaths home"><span class="brand-mark">M</span><span>Money<span class="brand-accent">Maths</span></span></a>
-    <nav class="main-nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="index.html#calculators">Calculators</a><a class="active" href="read.html">Read</a></nav>
+    <nav class="main-nav" aria-label="Main navigation"><a href="index.html">Home</a><a href="index.html#calculators">Calculators</a><a class="active" href="read.html">News</a></nav>
     <a class="header-action" href="index.html#calculators">Browse tools <span aria-hidden="true">-&gt;</span></a>
   </header>
   <main>
     <section class="read-hero shell">
       <div>
-        <p class="eyebrow">MoneyMaths reading room</p>
-        <h1>Understand the<br><em>numbers behind decisions.</em></h1>
-        <p class="hero-text">Clear explanations, formulas, and practical examples for making better financial choices.</p>
+        <p class="eyebrow">MoneyMaths news desk</p>
+        <h1>Financial news<br><em>without the noise.</em></h1>
+        <p class="hero-text">Useful updates and clear explainers across personal finance, markets, taxes, startups, and IPOs.</p>
       </div>
       <div class="read-hero-note">
         <span>01</span>
-        <p>Start with a concept, then use a calculator to put it into practice.</p>
+        <p>Choose a topic to see the stories that matter to you.</p>
       </div>
     </section>
 
     <section class="cms-reading-section shell" id="published-articles" hidden>
+      <div class="news-toolbar">
+        <div>
+          <p class="eyebrow">Browse by topic</p>
+          <h2>Latest news</h2>
+        </div>
+        <p class="news-count" id="news-count" aria-live="polite"></p>
+      </div>
+      <div class="news-filters" id="news-filters" role="group" aria-label="Filter news by category"></div>
       <div class="reading-grid" id="published-article-grid"></div>
+      <p class="news-empty" id="news-empty" hidden>No news in this category yet.</p>
     </section>
   </main>
   <footer class="site-footer shell"><span>MoneyMaths</span><span>Numbers for real life.</span></footer>

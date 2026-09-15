@@ -1,7 +1,7 @@
 ---
 title: "SIP vs Lump Sum: Which Wins?"
 summary: Compare regular investing with a lump-sum investment and learn when each approach may fit your goals.
-category: Investing basics
+category: Market
 date: 2026-09-14
 image: sip-vs-lump-sum.svg
 ---
