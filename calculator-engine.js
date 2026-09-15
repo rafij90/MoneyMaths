@@ -297,8 +297,47 @@ function slabTax(income, slabs) {
   if (income > lower) tax += (income - lower) * slabs[slabs.length - 1][1];
   return tax * 1.04;
 }
-function newRegimeTax(income) { return slabTax(Math.max(0, income - 75000), [[400000, 0], [800000, 0.05], [1200000, 0.1], [1600000, 0.15], [2000000, 0.2], [2400000, 0.25]]); }
-function oldRegimeTax(income) { return slabTax(Math.max(0, income - 50000), [[250000, 0], [500000, 0.05], [1000000, 0.2]]); }
+const TAX_SLABS = {
+  new: [[400000, 0], [800000, 0.05], [1200000, 0.1], [1600000, 0.15], [2000000, 0.2], [2400000, 0.25], [Infinity, 0.3]],
+  old: [[250000, 0], [500000, 0.05], [1000000, 0.2], [Infinity, 0.3]]
+};
+function newRegimeTax(income) { return slabTax(Math.max(0, income - 75000), TAX_SLABS.new); }
+function oldRegimeTax(income) { return slabTax(Math.max(0, income - 50000), TAX_SLABS.old); }
+function incomeTaxDetails(income, deductions) {
+  const newTaxable = Math.max(0, income - 75000);
+  const oldTaxable = Math.max(0, income - 50000 - deductions);
+  const newTax = newRegimeTax(income);
+  const oldTax = slabTax(oldTaxable, TAX_SLABS.old);
+  return { newTaxable, oldTaxable, newTax, oldTax, savings: Math.abs(newTax - oldTax), better: newTax <= oldTax ? 'New regime' : 'Old regime' };
+}
+const TDS_RULES = {
+  int_bank: { name: 'Interest - Banks / PO / Co-op', section: '194A', rate: 10, threshold: 50000, seniorThreshold: 100000, description: 'Interest paid by banks, post offices, and co-operative banks. Senior citizens get a higher threshold.' },
+  int_sec: { name: 'Interest on securities', section: '193', rate: 10, threshold: 10000, description: 'Interest distributions from securities.' },
+  dividend: { name: 'Dividend', section: '194', rate: 10, threshold: 10000, description: 'Dividend payments to resident shareholders.' },
+  contractor: { name: 'Contractor - individual / HUF', section: '194C', rate: 1, threshold: 30000, description: 'Payments to an individual or HUF contractor.' },
+  contractor_other: { name: 'Contractor - company / firm', section: '194C', rate: 2, threshold: 30000, description: 'Contract payments to companies, firms, or other entities.' },
+  professional: { name: 'Professional fees / royalty', section: '194J', rate: 10, threshold: 50000, description: 'Professional, technical, or royalty payments.' },
+  technical: { name: 'Technical services', section: '194J', rate: 2, threshold: 50000, description: 'Specified technical services and call-centre payments.' },
+  rent_plant: { name: 'Rent - plant and machinery', section: '194I(a)', rate: 2, threshold: 50000, description: 'Rent paid for plant, machinery, or equipment.' },
+  rent_property: { name: 'Rent - land, building, furniture', section: '194I(b)', rate: 10, threshold: 50000, description: 'Rent paid for land, building, furniture, or fittings.' },
+  property: { name: 'Purchase of immovable property', section: '194IA', rate: 1, threshold: 5000000, description: 'TDS on qualifying immovable property purchases.' },
+  insurance: { name: 'Insurance commission', section: '194D', rate: 2, threshold: 20000, description: 'Commission paid for insurance business.' },
+  brokerage: { name: 'Brokerage / commission', section: '194H', rate: 2, threshold: 20000, description: 'Brokerage and commission payments.' },
+  vda: { name: 'Virtual digital asset', section: '194S', rate: 1, threshold: 50000, description: 'Transfer consideration for virtual digital assets.' },
+  lottery: { name: 'Lottery / gambling winnings', section: '194B', rate: 30, threshold: 10000, description: 'Flat-rate withholding on specified winnings.', winnings: true },
+  tcs_motor: { name: 'Motor vehicle above Rs. 10 lakh', section: '206C(1F)', rate: 1, threshold: 1000000, description: 'TCS on qualifying motor vehicle sales.', tcs: true },
+  tcs_lrs: { name: 'Foreign remittance under LRS', section: '206C(1G)', rate: 20, threshold: 1000000, description: 'TCS on specified foreign remittances above the threshold.', tcs: true, excessOnly: true },
+  tcs_tour: { name: 'Overseas tour package', section: '206C(1G)', rate: 2, threshold: 0, description: 'TCS on overseas tour package consideration.', tcs: true }
+};
+function tdsDetails(rule, amount, status, senior) {
+  const threshold = senior && rule.seniorThreshold ? rule.seniorThreshold : rule.threshold;
+  const taxableAmount = rule.excessOnly ? Math.max(0, amount - threshold) : amount > threshold ? amount : 0;
+  const effectiveRate = status === 'no-pan' && !rule.winnings ? Math.max(rule.rate, rule.tcs ? 5 : 20) : rule.rate;
+  const baseTax = taxableAmount * effectiveRate / 100;
+  const surcharge = status === 'non-resident' && baseTax > 0 ? baseTax * (amount > 20000000 ? 0.25 : amount > 10000000 ? 0.15 : amount > 5000000 ? 0.1 : 0) : 0;
+  const cess = status === 'non-resident' ? (baseTax + surcharge) * 0.04 : 0;
+  return { threshold, taxableAmount, effectiveRate, baseTax, surcharge, cess, total: baseTax + surcharge + cess };
+}
 function dateInputValue(date) { return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`; }
 function dateDifferenceInDays(startDate, endDate) { return Math.round((endDate - startDate) / 86400000); }
 
@@ -425,7 +464,7 @@ function calculate(id, v) {
   if (['free-cash-flow', 'fcff'].includes(id)) return result(v.operatingCashFlow - v.capex, v.operatingCashFlow, v.capex, 'Operating cash flow', 'Capital expenditure');
   if (id === 'fcfe') return result(v.netIncome + v.da - v.capex - v.workingCapital + v.netBorrowing, v.netIncome, v.netBorrowing, 'Net income', 'Net borrowing');
   if (['roic-tree-du-pont-analysis', 'dupont-roe'].includes(id)) return result(v.netIncome / v.equity * 100, v.netIncome / v.revenue * 100, v.assets / v.equity, 'Net margin', 'Equity multiplier', 'percent', 'percent', 'number');
-  if (id === 'income-tax') { const newTax = newRegimeTax(v.income); const oldTax = oldRegimeTax(Math.max(0, v.income - v.deductions)); return result(newTax, oldTax, newTax, 'Old regime tax', 'New regime tax'); }
+  if (id === 'income-tax') { const taxes = incomeTaxDetails(v.income, v.deductions); return result(taxes.newTax, taxes.oldTax, taxes.newTax, 'Old regime tax', 'New regime tax'); }
   if (id === 'salary-in-hand') { const annual = v.ctc - v.variable - v.pf - v.tax - v.professionalTax; return result(annual / 12, v.ctc / 12, annual / 12, 'Monthly CTC', 'Monthly take-home'); }
   if (id === 'hra-exemption') { const exemption = Math.max(0, Math.min(v.hra, v.rent - v.basic * 0.1, v.basic * (v.metro ? 0.5 : 0.4))); return result(exemption, v.hra, v.rent, 'HRA received', 'Rent paid'); }
   if (id === 'capital-gains-tax') { const tax = v.holdingMonths >= 12 ? Math.max(0, v.gain - 125000) * 0.125 : v.gain * 0.2; return result(tax, v.gain, v.holdingMonths, 'Capital gain', 'Holding period', 'money', 'money', 'number'); }
@@ -593,8 +632,35 @@ function setupXirr() {
   document.querySelector('#calculator-form').addEventListener('submit', (event) => { event.preventDefault(); renderXirr(); });
   renderXirr();
 }
+function setupIncomeTax() {
+  const fieldsContainer = document.querySelector('#calculator-fields');
+  const fieldMarkup = (field) => `<label for="${field.id}">${field.label}${field.unit ? ` <span>(${field.unit})</span>` : ''}</label><div class="input-wrap"><span>${field.unit === '₹' ? '₹' : '%'}</span><input id="${field.id}" type="number" min="${field.min}" inputmode="decimal" step="any" value="${field.value}"></div>`;
+  fieldsContainer.innerHTML = `<div class="income-tax-tabs" role="tablist" aria-label="Income tax steps"><button type="button" class="is-active" data-tax-step="0">01 Basic details</button><button type="button" data-tax-step="1">02 Income details</button><button type="button" data-tax-step="2">03 Deductions</button></div><div class="income-tax-step is-active" data-tax-panel="0"><p class="form-note">Choose the assessment context before entering your figures.</p><label for="tax-year">Financial year</label><div class="input-wrap"><span>FY</span><select id="tax-year"><option>2026-27</option><option>2025-26</option></select></div><label for="tax-age">Age group</label><div class="input-wrap"><span>AGE</span><select id="tax-age"><option>Below 60</option><option>60 to 80</option><option>Above 80</option></select></div></div><div class="income-tax-step" data-tax-panel="1"><p class="form-note">Enter your annual gross income before deductions.</p>${fieldMarkup(fields[0])}</div><div class="income-tax-step" data-tax-panel="2"><p class="form-note">Add eligible deductions available under the old regime.</p>${fieldMarkup(fields[1])}</div>`;
+  const setStep = (step) => { document.querySelectorAll('[data-tax-step]').forEach((button) => button.classList.toggle('is-active', Number(button.dataset.taxStep) === step)); document.querySelectorAll('[data-tax-panel]').forEach((panel) => panel.classList.toggle('is-active', Number(panel.dataset.taxPanel) === step)); };
+  document.querySelectorAll('[data-tax-step]').forEach((button) => button.addEventListener('click', () => setStep(Number(button.dataset.taxStep))));
+  const slabRows = (slabs) => slabs.map(([upper, rate], index) => `<tr><td>${index === 0 ? `Up to ${money(upper)}` : upper === Infinity ? `Above ${money(slabs[index - 1][0])}` : `${money(slabs[index - 1][0])} to ${money(upper)}`}</td><td>${number(rate * 100)}%</td></tr>`).join('');
+  document.querySelector('#income-tax-new-slabs').innerHTML = slabRows(TAX_SLABS.new);
+  document.querySelector('#income-tax-old-slabs').innerHTML = slabRows(TAX_SLABS.old);
+  const renderIncomeTax = () => { const income = Number(document.querySelector('#income').value) || 0; const deductions = Number(document.querySelector('#deductions').value) || 0; const taxes = incomeTaxDetails(income, deductions); document.querySelector('#total-value').textContent = money(taxes.newTax); document.querySelector('#invested-value').textContent = money(taxes.oldTax); document.querySelector('#returns-value').textContent = money(taxes.newTax); document.querySelector('#breakdown-one-label').textContent = 'Old regime tax'; document.querySelector('#breakdown-two-label').textContent = 'New regime tax'; document.querySelector('#result-caption').textContent = `${taxes.better} is lower by ${money(taxes.savings)} under these assumptions.`; document.querySelector('#income-tax-new-taxable').textContent = money(taxes.newTaxable); document.querySelector('#income-tax-old-taxable').textContent = money(taxes.oldTaxable); document.querySelector('#income-tax-better').textContent = taxes.better; document.querySelector('#income-tax-savings').textContent = money(taxes.savings); document.querySelector('#income-tax-new-taxable-table').textContent = money(taxes.newTaxable); document.querySelector('#income-tax-old-taxable-table').textContent = money(taxes.oldTaxable); document.querySelector('#income-tax-new-tax-table').textContent = money(taxes.newTax); document.querySelector('#income-tax-old-tax-table').textContent = money(taxes.oldTax); document.querySelector('#income-tax-comparison-note').textContent = `${taxes.better} produces the lower estimated liability. Actual tax can differ based on age, special-rate income, surcharge, rebates, and other eligible deductions.`; };
+  document.querySelector('#calculator-form').addEventListener('submit', (event) => { event.preventDefault(); renderIncomeTax(); setStep(2); });
+  renderIncomeTax();
+}
+function setupTds() {
+  const fieldsContainer = document.querySelector('#calculator-fields');
+  const groupedOptions = (tcs) => Object.entries(TDS_RULES).filter(([, rule]) => Boolean(rule.tcs) === tcs).map(([key, rule]) => `<option value="${key}">${rule.name} (Sec ${rule.section})</option>`).join('');
+  fieldsContainer.innerHTML = `<div class="tds-steps"><span class="is-active">01 Rule</span><span>02 Details</span><span>03 Result</span></div><label for="tds-year">Financial year</label><div class="input-wrap"><span>FY</span><select id="tds-year"><option>2026-27</option><option>2025-26</option></select></div><label for="tds-rule">Nature of payment / transaction</label><div class="input-wrap"><span>SEC</span><select id="tds-rule"><optgroup label="TDS payments">${groupedOptions(false)}</optgroup><optgroup label="TCS collections">${groupedOptions(true)}</optgroup></select></div><div class="tds-inline-note" id="tds-live-description"></div><label for="tds-amount">Payment / transaction amount <span>(₹)</span></label><div class="input-wrap"><span>₹</span><input id="tds-amount" type="number" min="0" inputmode="decimal" step="any" value="100000"></div><label for="tds-status">Deductee / collectee status</label><div class="input-wrap"><span>TYPE</span><select id="tds-status"><option value="resident">Resident - PAN available</option><option value="no-pan">No PAN / invalid PAN</option><option value="non-resident">Non-resident</option></select></div><label class="tds-check"><input id="tds-senior" type="checkbox"> Senior citizen threshold applies</label>`;
+  const updateRule = () => { const rule = TDS_RULES[document.querySelector('#tds-rule').value]; document.querySelector('#tds-live-description').textContent = `${rule.description} Base rate: ${rule.rate}%. Threshold: ${money(rule.threshold)}${rule.seniorThreshold ? `, or ${money(rule.seniorThreshold)} for senior citizens` : ''}.`; document.querySelector('#tds-senior').disabled = !rule.seniorThreshold; };
+  const renderTds = () => { const rule = TDS_RULES[document.querySelector('#tds-rule').value]; const amount = Number(document.querySelector('#tds-amount').value) || 0; const status = document.querySelector('#tds-status').value; const senior = document.querySelector('#tds-senior').checked; const details = tdsDetails(rule, amount, status, senior); document.querySelector('#total-value').textContent = money(details.total); document.querySelector('#invested-value').textContent = money(amount); document.querySelector('#returns-value').textContent = `${number(details.effectiveRate)}%`; document.querySelector('#breakdown-one-label').textContent = rule.tcs ? 'Transaction amount' : 'Payment amount'; document.querySelector('#breakdown-two-label').textContent = 'Effective rate'; document.querySelector('#result-caption').textContent = `${rule.tcs ? 'TCS collection' : 'TDS deduction'} under section ${rule.section} is estimated at ${money(details.total)}.`; document.querySelector('#tds-rule-name').textContent = rule.name; document.querySelector('#tds-rule-description').textContent = rule.description; document.querySelector('#tds-section').textContent = rule.section; document.querySelector('#tds-base-rate').textContent = `${number(rule.rate)}%`; document.querySelector('#tds-threshold').textContent = money(details.threshold); document.querySelector('#tds-gross').textContent = money(amount); document.querySelector('#tds-taxable').textContent = money(details.taxableAmount); document.querySelector('#tds-effective-rate').textContent = `${number(details.effectiveRate)}%`; document.querySelector('#tds-base-tax').textContent = money(details.baseTax); document.querySelector('#tds-surcharge').textContent = money(details.surcharge); document.querySelector('#tds-cess').textContent = money(details.cess); document.querySelector('#tds-total').textContent = money(details.total); };
+  document.querySelector('#tds-rule').addEventListener('change', () => { updateRule(); renderTds(); });
+  document.querySelector('#tds-status').addEventListener('change', renderTds);
+  document.querySelector('#tds-senior').addEventListener('change', renderTds);
+  document.querySelector('#calculator-form').addEventListener('submit', (event) => { event.preventDefault(); renderTds(); document.querySelector('#tds-analysis').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+  document.querySelector('.calculate-button').textContent = 'Compute assessment';
+  const clearButton = document.createElement('button'); clearButton.type = 'button'; clearButton.className = 'button tds-clear-button'; clearButton.textContent = 'Clear form'; clearButton.addEventListener('click', () => { document.querySelector('#tds-amount').value = '100000'; document.querySelector('#tds-status').value = 'resident'; document.querySelector('#tds-senior').checked = false; renderTds(); }); document.querySelector('.calculate-button').after(clearButton);
+  updateRule(); renderTds();
+}
 function render() { const values = Object.fromEntries(fields.map((item) => { const rawValue = document.querySelector(`#${item.id}`).value.trim(); return [item.id, item.type === 'date' ? new Date(`${rawValue}T00:00:00`) : Number(rawValue.replaceAll(',', '')) || 0]; })); const output = calculate(id, values); document.querySelector('#total-value').textContent = formatValue(output.value, output.valueType); document.querySelector('#invested-value').textContent = output.primaryLabel === 'Months of cover' ? `${number(output.primary)} months` : formatValue(output.primary, output.primaryType); document.querySelector('#returns-value').textContent = output.secondaryLabel === 'Months of cover' ? `${number(output.secondary)} months` : formatValue(output.secondary, output.secondaryType); document.querySelector('#breakdown-one-label').textContent = output.primaryLabel; document.querySelector('#breakdown-two-label').textContent = output.secondaryLabel; document.querySelector('#result-caption').textContent = 'This result uses the assumptions entered above. Actual returns, rates, and costs may vary.'; }
-if (id === 'xirr') setupXirr(); else { document.querySelector('#calculator-form').addEventListener('submit', (event) => { event.preventDefault(); render(); }); render(); }
+if (id === 'xirr') setupXirr(); else if (id === 'income-tax') setupIncomeTax(); else if (id === 'tds') setupTds(); else { document.querySelector('#calculator-form').addEventListener('submit', (event) => { event.preventDefault(); render(); }); render(); }
 if (id === 'dcf-valuation' && document.querySelector('#dcf-forecast')) {
   const values = Object.fromEntries(fields.map((item) => [item.id, Number(document.querySelector(`#${item.id}`).value) || 0]));
   const fcff = values.revenue * (1 + values.growth / 100) * (values.ebitMargin / 100) * (1 - values.taxRate / 100) + values.da - values.capex - values.workingCapital;
