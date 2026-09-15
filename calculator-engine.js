@@ -553,10 +553,31 @@ function calculate(id, v) {
 const id = document.body.dataset.calculator;
 const tool = TOOLS.find((item) => item[0] === id) || PERSONAL[0];
 const fields = fieldsFor(id);
+const guideOverrides = {
+  sip: ['Future value = monthly investment × [((1 + monthly rate)^months − 1) / monthly rate] × (1 + monthly rate). Total invested is monthly investment × months.', 'Compare total invested with estimated returns. A longer horizon gives compounding more time to work, but actual investment returns will vary.'],
+  'lump-sum': ['Future value = principal × (1 + annual rate)^years. The gain is future value minus the initial investment.', 'The full amount compounds from day one, so this can grow faster than staggered investing in a steadily rising market, with greater timing risk.'],
+  emi: ['EMI = principal × rate × (1 + rate)^months / ((1 + rate)^months − 1), using the monthly interest rate. Total interest is total repayment minus principal.', 'A shorter term usually reduces total interest but increases the monthly payment. Check the payment against dependable monthly cash flow.'],
+  'debt-to-income': ['Debt-to-income ratio = monthly debt payments ÷ gross monthly income × 100.', 'Lower DTI generally indicates more borrowing capacity. Lenders use it as an affordability signal, but their thresholds vary.'],
+  'emergency-fund': ['Emergency-fund target = essential monthly spending × months of cover.', 'Keep this reserve liquid and low risk. Six months is a common planning benchmark, but the right buffer depends on income stability and obligations.'],
+  cagr: ['CAGR = [(ending value ÷ starting value)^(1 ÷ years) − 1] × 100.', 'CAGR smooths the path between two values. It is useful for comparison, but it does not show interim volatility or losses.'],
+  'net-worth': ['Net worth = total assets − total liabilities.', 'A positive, growing net worth is one broad measure of financial progress. Track it over time rather than judging it from income alone.'],
+  'future-value': ['Future value = present value × (1 + annual rate)^years.', 'This estimates what today\'s money could become under a constant rate. Inflation, taxes, fees, and changing returns can materially alter the outcome.'],
+  'present-value': ['Present value = future value ÷ (1 + discount rate)^years.', 'Present value puts a future amount into today\'s terms. The chosen discount rate is an assumption, not a guaranteed return.'],
+  'compound-interest': ['Future value = principal × (1 + annual rate ÷ compounds per year)^(compounds per year × years).', 'More frequent compounding increases the effective return at the same stated rate. Compare the result with the principal to see interest earned.'],
+  'absolute-return': ['Absolute return = (ending value − starting value) ÷ starting value × 100.', 'This is the total gain or loss for the holding period. Use annualized return when comparing investments held for different lengths of time.'],
+  'discount-factor': ['Discount factor = 1 ÷ (1 + discount rate)^years.', 'The factor converts a future cash flow into present value. Longer periods and higher rates produce smaller factors.']
+};
+const guideInputText = fields.length ? fields.map((field) => `${field.label}${field.unit ? ` (${field.unit})` : ''}`).join(', ') : 'Dated cash flows for each scenario, using negative amounts for investments and positive amounts for receipts.';
+const guideLogic = guideOverrides[id]?.[0] || `The calculator uses ${fields.length ? fields.map((field) => field.label.toLowerCase()).join(', ') : 'the entered cash flows'} to produce ${tool[1].replace(/ Calculator$/, '').toLowerCase()}. The result breakdown shows the main inputs used in that calculation.`;
+const guideInterpretation = guideOverrides[id]?.[1] || 'Use the result as an estimate under the assumptions entered above. Compare it with the breakdown values and test different assumptions before making a financial decision.';
 document.title = `${tool[1]} | MoneyMaths`;
 document.querySelector('#calculator-category').textContent = tool[2];
 document.querySelector('#calculator-title').textContent = tool[1];
 document.querySelector('#calculator-description').textContent = tool[3];
+document.querySelector('#guide-title').textContent = `${tool[1]}: inputs, logic, and interpretation`;
+document.querySelector('#guide-inputs').textContent = guideInputText;
+document.querySelector('#guide-logic').textContent = guideLogic;
+document.querySelector('#guide-interpretation').textContent = guideInterpretation;
 document.querySelector('#calculator-fields').innerHTML = fields.map((item) => `<label for="${item.id}">${item.label}${item.unit ? ` <span>(${item.unit})</span>` : ''}</label><div class="input-wrap"><span>${item.unit === '₹' ? '₹' : item.unit === '%' ? '%' : item.type === 'date' ? '' : 'N'}</span><input id="${item.id}" type="${item.type}"${item.type === 'number' ? ` min="${item.min}" inputmode="decimal"` : ''}${item.type === 'number' ? ' step="any"' : ` step="${item.step}"`} value="${item.value}"></div>`).join('');
 function formatValue(value, type) { return type === 'percent' ? pct(value) : type === 'number' ? number(value) : type === 'date' ? value instanceof Date ? dateInputValue(value) : value : money(value); }
 function setupXirr() {
