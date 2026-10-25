@@ -1,5 +1,5 @@
 ---
-title: "What Basel III Really Changed After the 2008 Crisis (In Plain English)"
+title: "What Basel III Really Changed After the 2008 Crisis"
 description: "How the 2008 Global Financial Crisis led to Basel III, and what it changed in bank capital, liquidity, leverage, and transparency, explained simply with examples."
 category: Banking & Regulation
 date: 2026-10-25
