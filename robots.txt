@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+Sitemap: https://rafij90.github.io/MoneyMaths/sitemap.xml
