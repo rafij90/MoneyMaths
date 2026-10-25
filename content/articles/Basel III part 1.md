@@ -6,8 +6,6 @@ date: 2026-10-25
 read_time: "6 min read"
 ---
 
-# What Basel III Really Changed After the 2008 Crisis
-
 In 2008, some of the world's biggest banks collapsed, or survived only because governments rescued them. The scary part was that on paper, many of these banks looked fine. They met the capital rules of the time. So what went wrong?
 
 The answer is that the rules were too weak. They allowed banks to count low-quality items as "capital," to run on very little cash, and to borrow heavily. When trouble came, there was no real cushion. The Basel Committee on Banking Supervision (BCBS) responded with a new set of global standards called **Basel III**.
