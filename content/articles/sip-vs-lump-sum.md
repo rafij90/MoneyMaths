@@ -19,3 +19,10 @@ A lump sum invests available cash immediately. It gets more time in the market, 
 ## A practical decision
 
 Use a SIP when your income arrives regularly or you want a repeatable habit. Consider a lump sum when you already have the money, have a long time horizon, and can tolerate short-term changes in value. Compare both approaches with the [lump-sum calculator](../calculators/lump-sum.html) and [SIP calculator](../calculators/sip.html).
+
+Written by Rafijaddin Sardar
+
+Rafijaddin Sardar works on financial modeling, investment analysis, and data-driven research. His work includes company valuation (DCF), Excel forecasting models, bank and peer analysis, and Python-based tools for market data and simulations. He writes to make complex finance topics simple and practical.
+---
+
+This report is not any financial advice. Investment is subject to market risk.
