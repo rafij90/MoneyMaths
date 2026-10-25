@@ -98,4 +98,9 @@ The Basel Committee publishes them on the Bank for International Settlements web
 
 ---
 
+**Written by Rafijaddin Sardar**
+
+Rafijaddin Sardar works on financial modeling, investment analysis, and data-driven research. His work includes company valuation (DCF), Excel forecasting models, bank and peer analysis, and Python-based tools for market data and simulations. He writes to make complex finance topics simple and practical.
+---
+
 *This article is for educational purposes and does not constitute investment or regulatory advice. Ratios and phase-in dates differ by country and change over time, so check your regulator's latest rules.*
