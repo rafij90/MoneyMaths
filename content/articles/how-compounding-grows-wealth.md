@@ -93,5 +93,10 @@ More frequent compounding (monthly vs. yearly) produces slightly higher returns 
 Use the [SIP calculator](/calculators/sip.html) — enter your monthly amount, expected return, and time horizon to see your own compounding curve.
 
 ---
+---
+
+**Written by Rafijaddin Sardar**
+
+Rafijaddin Sardar specialises in financial modeling, valuation (DCF, multiples, residual income, private company), startup forecasting, and bank and peer analysis. He builds Python tools for market data and simulations, and writes to make finance simple and practical.
 
 *Numbers here are illustrative examples to explain the mechanics of compounding, not investment advice or return guarantees. Actual returns depend on the instrument, market conditions, and time period.*
