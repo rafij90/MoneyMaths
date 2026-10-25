@@ -67,5 +67,8 @@ Usually you get to choose. Reducing tenure (keeping EMI the same) saves more tot
 Use the [EMI calculator](/calculators/emi.html) to generate your loan's amortization schedule and see the interest-vs-principal split for every year of your tenure.
 
 ---
+**Written by Rafijaddin Sardar**
 
+Rafijaddin Sardar works on financial modeling, investment analysis, and data-driven research. His work includes company valuation (DCF), Excel forecasting models, bank and peer analysis, and Python-based tools for market data and simulations. He writes to make complex finance topics simple and practical.
+---
 *Numbers here are illustrative examples used to explain how EMIs are structured, not a quote or offer. Actual EMI, interest, and amortization depend on your lender's terms, rate type, and loan conditions.*
