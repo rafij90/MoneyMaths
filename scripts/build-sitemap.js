@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { SITE_URL, seoTags, injectSeo } = require('./site-config');
+const { SITE_URL, pageUrl, seoTags, injectSeo } = require('./site-config');
 
 const root = path.resolve(__dirname, '..');
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
@@ -23,7 +23,10 @@ for (const page of topPages) {
 }
 
 // 2) Add SEO tags to every calculator and article page (these are generated, so we do it here).
-const entries = [{ loc: `${SITE_URL}/`, priority: '1.0', changefreq: 'weekly' }, { loc: `${SITE_URL}/read.html`, priority: '0.7', changefreq: 'weekly' }];
+const entries = [
+  { loc: pageUrl(''), priority: '1.0', changefreq: 'weekly' },
+  { loc: pageUrl('read.html'), priority: '0.7', changefreq: 'weekly' }
+];
 
 const processFolder = (folder, type, priority) => {
   const dir = path.join(root, folder);
@@ -36,7 +39,7 @@ const processFolder = (folder, type, priority) => {
     const pagePath = `${folder}/${file}`;
     const unescapedTitle = title.replace(/&amp;/g, '&').replace(/&#039;/g, "'");
     fs.writeFileSync(filePath, injectSeo(html, seoTags({ pagePath, title: unescapedTitle, description, type })));
-    entries.push({ loc: `${SITE_URL}/${pagePath}`, priority, changefreq: folder === 'articles' ? 'monthly' : 'monthly' });
+    entries.push({ loc: pageUrl(pagePath), priority, changefreq: 'monthly' });
   }
 };
 processFolder('calculators', 'website', '0.8');
@@ -44,7 +47,7 @@ processFolder('articles', 'article', '0.6');
 
 // Article dates -> <lastmod>
 const index = JSON.parse(read('articles/index.json'));
-const dateBySlug = new Map(index.map((a) => [`${SITE_URL}/articles/${a.slug}.html`, a.date]));
+const dateBySlug = new Map(index.map((a) => [pageUrl(`articles/${a.slug}.html`), a.date]));
 
 const xml = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
   .concat(entries.map((e) => {
