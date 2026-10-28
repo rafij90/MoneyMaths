@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="595" height="480" >
+  <g fill="none" stroke-width="3">
+    <path stroke="#129da6" d="M297 121v266"/>
+    <path stroke="#f05647" d="m323 121 25 60"/>
+    <path stroke="#6d5391" d="m348 121 130 247.8"/>
+    <path stroke="#99332e" d="m374 121 120.2 163.6"/>
+    <path stroke="#95c83d" d="m399 121 131.9 63.9"/>
+    <path stroke="#f1a551" d="m272 121-66.1 164.8"/>
+    <path stroke="#0464a9" d="M246 121 54.5 386.1"/>
+    <path stroke="#9a8ca8" d="M221 121 49 183.5"/>
+  </g>
+  <path fill="#040404" d="M129 0h337v121H129z"/>
+  <path fill="#f05647" d="M281 181h136v56H281z"/>
+  <path fill="#95c83d" d="M477 181h99v56h-99z"/>
+  <path fill="#6d5391" d="M413 365h124v56H413z"/>
+  <path fill="#9a8ca8" d="M0 181h113v56H0z"/>
+  <path fill="#0464a9" d="M0 384h113v56H0z"/>
+  <path fill="#059ea7" d="M237 453h57v27h-57zm138 0h57v27h-57zm69 0h57v27h-57zm69 0h57v27h-57zm-345 0h57v27h-57zm72-69h113v56H240z"/>
+  <path fill="none" stroke="#129da6" stroke-width="2" d="M541 453v-6H197v6m100-12v6m-31 6v-6m69 6v-6m69 6v-6m69 6v-6"/>
+  <path fill="#059ea7" d="M306 453h57v27h-57z"/>
+  <path fill="#f1a551" d="M105 283h204v56H105z"/>
+  <path fill="#99332e" d="M391 283h204v56H391z"/>
+  <g fill="#fff" font-family="sans-serif" text-anchor="middle">
+    <text x="298.396" y="75.06" font-size="56" font-weight="bold">Alphabet</text>
+    <g font-size="24">
+      <text x="525.516" y="218">Fiber</text>
+      <text x="56.416" y="218">Calico</text>
+      <text x="206.808" y="317.24">Google Ventures</text>
+      <text x="493.288" y="317.24">Google Capital</text>
+      <text x="348.408" y="215.24">Google<tspan font-weight="bold" dy="-1.2em" font-size="45%">x</tspan></text>
+      <text x="55.6" y="420.448">Nest</text>
+      <text x="296.38" y="418.24">Google</text>
+      <text x="475" y="399.24">Verily</text>
+    </g>
+    <g font-size="12">
+      <text x="197.01" y="471">Android</text>
+      <text x="265.986" y="471"> Search</text>
+      <text x="334.806" y="471">Youtube</text>
+      <text x="403.77" y="469.362">Apps</text>
+      <text x="472.188" y="469.344">Maps</text>
+      <text x="541.77" y="471">Ads</text>
+    </g>
+  </g>
+</svg>

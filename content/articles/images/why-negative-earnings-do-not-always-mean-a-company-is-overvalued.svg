@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="762" viewBox="0 0 760 762">
+<title>OpenAI corporate structure</title>
+<desc>Org chart: the Board of Directors controls the OpenAI Foundation, which is a nonprofit. The OpenAI Foundation owns 26 percent and controls 100 percent of OpenAI Group PBC. Microsoft owns about 27 percent and employees and investors own about 47 percent. Below the PBC, there are a number of holding companies, which own each other in a chain from OpenAI Holdings LLC down through OAI Corp, OpenAI Global HoldCo Inc, OpenAI Global LLC, OpenAI OpCo LLC to OpenAI LLC, an operating company which owns the foreign branches. Stargate, a data-centre joint venture, is shown as a side branch. Aestas, a vehicle that pools employee and investor equity, is shown beside the investors. OpenAI GP, L.L.C., a subsidiary of OpenAI Group PBC, is shown below Aestas and acts as its general partner or managing entity; it was formerly the central LLC through which the nonprofit controlled OpenAI's for-profit operations. The OpenAI Startup Fund is shown as an affiliated entity that OpenAI does not own.</desc>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="context-stroke"/></marker>
+<style>
+text{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
+.t{font-size:14px;fill:#1A1A1A}
+.t13{font-size:13px;fill:#1A1A1A}
+.tc{font-size:15px;fill:#1A1A1A}
+.ts{font-size:11px;fill:#1A1A1A}
+.tsm{font-size:10px;fill:#1A1A1A}
+.tn{font-size:11px;fill:#1A1A1A}
+.box{fill:#FFFFFF;stroke:#1A1A1A;stroke-width:1.2}
+.cont{fill:#F5F5F4;stroke:#1A1A1A;stroke-width:1.2}
+.ln{stroke:#1A1A1A;stroke-width:1.2;fill:none}
+.dash{stroke:#1A1A1A;stroke-width:1.3;fill:none;stroke-dasharray:6 4}
+.dot{stroke:#1A1A1A;stroke-width:1.7;fill:none;stroke-dasharray:1 4;stroke-linecap:round}
+</style>
+</defs>
+
+<rect class="box" x="300" y="30" width="160" height="44" rx="2"/>
+<text class="t" x="380" y="52" text-anchor="middle" dominant-baseline="central">Board of Directors</text>
+<line class="ln" x1="380" y1="74" x2="380" y2="102" marker-end="url(#arrow)"/>
+<text class="tn" x="388" y="88" dominant-baseline="central">controls</text>
+
+<rect class="box" x="270" y="102" width="220" height="52" rx="2"/>
+<text class="t" x="380" y="120" text-anchor="middle" dominant-baseline="central">OpenAI Foundation</text>
+<text class="ts" x="380" y="138" text-anchor="middle" dominant-baseline="central">Nonprofit &#183; formerly OpenAI, Inc.</text>
+<line class="ln" x1="380" y1="154" x2="380" y2="188" marker-end="url(#arrow)"/>
+<text class="tn" x="388" y="165" dominant-baseline="central">owns 26%</text>
+<text class="tn" x="388" y="179" dominant-baseline="central">controls 100%</text>
+
+<rect class="box" x="65" y="200" width="160" height="48" rx="2"/>
+<text class="t" x="145" y="224" text-anchor="middle" dominant-baseline="central">Microsoft</text>
+<line class="ln" x1="225" y1="224" x2="268" y2="224" marker-end="url(#arrow)"/>
+<text class="tn" x="246" y="216" text-anchor="middle" dominant-baseline="central">~27%</text>
+
+<rect class="box" x="270" y="188" width="220" height="74" rx="2"/>
+<text class="t" x="380" y="209" text-anchor="middle" dominant-baseline="central">OpenAI Group PBC</text>
+<text class="ts" x="380" y="228" text-anchor="middle" dominant-baseline="central">For-profit public benefit corp.</text>
+<text class="ts" x="380" y="244" text-anchor="middle" dominant-baseline="central">recapitalized Oct 28, 2025</text>
+
+<rect class="box" x="535" y="200" width="160" height="48" rx="2"/>
+<text class="t" x="615" y="215" text-anchor="middle" dominant-baseline="central">Employees and</text>
+<text class="t" x="615" y="231" text-anchor="middle" dominant-baseline="central">investors</text>
+<line class="ln" x1="535" y1="224" x2="492" y2="224" marker-end="url(#arrow)"/>
+<text class="tn" x="514" y="216" text-anchor="middle" dominant-baseline="central">~47%</text>
+
+<line class="dash" x1="615" y1="248" x2="615" y2="278" marker-end="url(#arrow)"/>
+<rect class="box" x="495" y="278" width="240" height="56" rx="2"/>
+<text class="t13" x="615" y="299" text-anchor="middle" dominant-baseline="central">Aestas Management Co., LLC</text>
+<text class="ts" x="615" y="318" text-anchor="middle" dominant-baseline="central">Pools employee &amp; investor equity stakes</text>
+
+<line class="ln" x1="455" y1="391" x2="495" y2="391" marker-end="url(#arrow)"/>
+<text class="tn" x="475" y="383" text-anchor="middle" dominant-baseline="central">owns</text>
+<line class="ln" x1="615" y1="360" x2="615" y2="334" marker-end="url(#arrow)"/>
+<text class="tn" x="640" y="347" dominant-baseline="central">manages</text>
+<rect class="box" x="495" y="360" width="240" height="62" rx="2"/>
+<text class="t" x="615" y="381" text-anchor="middle" dominant-baseline="central">OpenAI GP, L.L.C.</text>
+<text class="ts" x="615" y="400" text-anchor="middle" dominant-baseline="central">Subsidiary of OpenAI Group PBC</text>
+<text class="ts" x="615" y="414" text-anchor="middle" dominant-baseline="central">General partner / manager of Aestas</text>
+
+<line class="ln" x1="380" y1="262" x2="380" y2="285"/>
+<line class="ln" x1="230" y1="285" x2="455" y2="285"/>
+<line class="ln" x1="230" y1="285" x2="230" y2="305" marker-end="url(#arrow)"/>
+<line class="ln" x1="455" y1="285" x2="455" y2="491"/>
+<line class="dot" x1="455" y1="491" x2="455" y2="608"/>
+
+<rect class="cont" x="40" y="305" width="380" height="351" rx="2"/>
+<text class="tc" x="230" y="327" text-anchor="middle" dominant-baseline="central">Holding &amp; operating companies</text>
+<text class="ts" x="230" y="346" text-anchor="middle" dominant-baseline="central">Layered for tax, liability, and legacy investor terms</text>
+
+<rect class="box" x="125" y="356" width="210" height="36" rx="2"/>
+<text class="t" x="230" y="374" text-anchor="middle" dominant-baseline="central">OpenAI Holdings, LLC</text>
+
+<line class="ln" x1="230" y1="392" x2="230" y2="402"/>
+<line class="ln" x1="134" y1="402" x2="326" y2="402"/>
+<line class="ln" x1="134" y1="402" x2="134" y2="416" marker-end="url(#arrow)"/>
+<line class="ln" x1="326" y1="402" x2="326" y2="416" marker-end="url(#arrow)"/>
+
+<rect class="box" x="59" y="416" width="150" height="42" rx="2"/>
+<text class="t13" x="134" y="437" text-anchor="middle" dominant-baseline="central">OAI Corp.</text>
+
+<rect class="box" x="251" y="416" width="150" height="42" rx="2"/>
+<text class="t13" x="326" y="430" text-anchor="middle" dominant-baseline="central">OpenAI Global</text>
+<text class="t13" x="326" y="446" text-anchor="middle" dominant-baseline="central">HoldCo, Inc.</text>
+
+<line class="ln" x1="134" y1="458" x2="134" y2="472"/>
+<line class="ln" x1="326" y1="458" x2="326" y2="472"/>
+<line class="ln" x1="134" y1="472" x2="326" y2="472"/>
+<line class="ln" x1="230" y1="472" x2="230" y2="484" marker-end="url(#arrow)"/>
+
+<rect class="box" x="125" y="484" width="210" height="36" rx="2"/>
+<text class="t" x="230" y="502" text-anchor="middle" dominant-baseline="central">OpenAI Global, LLC</text>
+
+<line class="ln" x1="230" y1="520" x2="230" y2="534" marker-end="url(#arrow)"/>
+
+<rect class="box" x="125" y="534" width="210" height="44" rx="2"/>
+<text class="t" x="230" y="550" text-anchor="middle" dominant-baseline="central">OpenAI OpCo, LLC</text>
+<text class="ts" x="230" y="566" text-anchor="middle" dominant-baseline="central">formerly OpenAI L.P.</text>
+
+<line class="ln" x1="230" y1="578" x2="230" y2="592" marker-end="url(#arrow)"/>
+
+<rect class="box" x="125" y="592" width="210" height="46" rx="2"/>
+<text class="t" x="230" y="609" text-anchor="middle" dominant-baseline="central">OpenAI, LLC</text>
+<text class="ts" x="230" y="625" text-anchor="middle" dominant-baseline="central">Main operating company</text>
+
+<line class="ln" x1="230" y1="656" x2="230" y2="676"/>
+<line class="ln" x1="71" y1="676" x2="654" y2="676"/>
+<line class="ln" x1="71" y1="676" x2="71" y2="690" marker-end="url(#arrow)"/>
+<line class="ln" x1="160" y1="676" x2="160" y2="690" marker-end="url(#arrow)"/>
+<line class="ln" x1="249" y1="676" x2="249" y2="690" marker-end="url(#arrow)"/>
+<line class="ln" x1="338" y1="676" x2="338" y2="690" marker-end="url(#arrow)"/>
+<line class="ln" x1="427" y1="676" x2="427" y2="690" marker-end="url(#arrow)"/>
+<line class="ln" x1="516" y1="676" x2="516" y2="690" marker-end="url(#arrow)"/>
+<line class="ln" x1="654" y1="676" x2="654" y2="690" marker-end="url(#arrow)"/>
+
+<rect class="box" x="31" y="690" width="80" height="44" rx="2"/>
+<text class="t13" x="71" y="712" text-anchor="middle" dominant-baseline="central">Ireland</text>
+<rect class="box" x="120" y="690" width="80" height="44" rx="2"/>
+<text class="t13" x="160" y="712" text-anchor="middle" dominant-baseline="central">UK</text>
+<rect class="box" x="209" y="690" width="80" height="44" rx="2"/>
+<text class="t13" x="249" y="712" text-anchor="middle" dominant-baseline="central">Japan</text>
+<rect class="box" x="298" y="690" width="80" height="44" rx="2"/>
+<text class="t13" x="338" y="712" text-anchor="middle" dominant-baseline="central">France</text>
+<rect class="box" x="387" y="690" width="80" height="44" rx="2"/>
+<text class="t13" x="427" y="712" text-anchor="middle" dominant-baseline="central">Singapore</text>
+<rect class="box" x="476" y="690" width="80" height="44" rx="2"/>
+<text class="t13" x="516" y="712" text-anchor="middle" dominant-baseline="central">India</text>
+<rect class="box" x="578" y="690" width="152" height="44" rx="2"/>
+<text class="t13" x="654" y="706" text-anchor="middle" dominant-baseline="central">Canada</text>
+<text class="tsm" x="654" y="721" text-anchor="middle" dominant-baseline="central">(Summerlight Technologies)</text>
+
+<line class="ln" x1="455" y1="491" x2="480" y2="491" marker-end="url(#arrow)"/>
+<rect class="box" x="480" y="446" width="240" height="90" rx="2"/>
+<text class="t" x="600" y="466" text-anchor="middle" dominant-baseline="central">Stargate LLC</text>
+<text class="ts" x="600" y="486" text-anchor="middle" dominant-baseline="central">AI data-center joint venture</text>
+<text class="ts" x="600" y="503" text-anchor="middle" dominant-baseline="central">OpenAI ~40% &#183; SoftBank ~40%</text>
+<text class="ts" x="600" y="519" text-anchor="middle" dominant-baseline="central">Oracle ~10% &#183; MGX ~10%</text>
+
+<line class="dot" x1="455" y1="608" x2="480" y2="608" marker-end="url(#arrow)"/>
+<rect class="box" x="480" y="556" width="240" height="105" rx="2"/>
+<text class="t" x="600" y="576" text-anchor="middle" dominant-baseline="central">OpenAI Startup Fund</text>
+<text class="ts" x="600" y="598" text-anchor="middle" dominant-baseline="central">Affiliated with OpenAI but not owned or</text>
+<text class="ts" x="600" y="614" text-anchor="middle" dominant-baseline="central">funded by it; backs AI startups with</text>
+<text class="ts" x="600" y="630" text-anchor="middle" dominant-baseline="central">outside capital. Control of its general</text>
+<text class="ts" x="600" y="646" text-anchor="middle" dominant-baseline="central">partner is not publicly clear.</text>
+</svg>
